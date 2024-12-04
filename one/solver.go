@@ -9,7 +9,17 @@ import (
 	"strings"
 )
 
-func solve(file string) int {
+func countOccurrences(arr []int, num int) int {
+	count := 0
+	for _, val := range arr {
+		if val == num {
+			count++
+		}
+	}
+	return count
+}
+
+func parseFile(file string) ([]int, []int) {
 	input, err := os.ReadFile(file)
 
 	if err != nil {
@@ -30,15 +40,30 @@ func solve(file string) int {
 		rightNumbers[i] = right
 	}
 
+	return leftNumbers, rightNumbers
+}
+
+func part1Solve(leftNumbers, rightNumbers []int) int {
 	sort.Ints(leftNumbers)
 	sort.Ints(rightNumbers)
 
 	totalDistance := 0
 
-	for i := range lines {
+	for i := range leftNumbers {
 		indexDistance := math.Abs(float64(leftNumbers[i] - rightNumbers[i]))
 		totalDistance += int(indexDistance)
 	}
 
 	return totalDistance
+}
+
+func part2Solve(leftNumbers, rightNumbers []int) int {
+	similarityScore := 0
+
+	for i := range leftNumbers {
+		occurrences := countOccurrences(rightNumbers, leftNumbers[i])
+		similarityScore += int(leftNumbers[i] * occurrences)
+	}
+
+	return similarityScore
 }
