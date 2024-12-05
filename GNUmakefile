@@ -1,9 +1,9 @@
-CHALLENGE ?= one
+DAY ?= one
 
 default: test 
 
 solve:
-	go run ./$(CHALLENGE)/main.go ./$(CHALLENGE)/solver.go
+	go run ./$(DAY)/main.go ./$(DAY)/solver.go
 
 test:
 	go test ./...
