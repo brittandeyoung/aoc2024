@@ -64,10 +64,8 @@ func isReportSafeWithDamper(levels []int) bool {
 		for i := range levels {
 			newLevels := make([]int, len(levels)-1)
 			copy(newLevels[:i], levels[:i])
-
 			copy(newLevels[i:], levels[i+1:])
 
-			// newLevels = append(levels[:i], levels[i+1:]...)
 			fmt.Println("index: ", i, "newlevels: ", newLevels, "levels: ", levels)
 			if isReportSafe(newLevels) {
 				return true
